@@ -1,0 +1,10 @@
+paper_id,filename,url,status,bytes,error
+01_sahami_1998,01_sahami_1998_bayesian_filtering_junk_email.pdf,https://cdn.aaai.org/Workshops/1998/WS-98-05/WS98-05-009.pdf,ok,774235,System.Collections.ArrayList
+02_drucker_1999,02_drucker_1999_svm_spam_categorization.pdf,https://www.site.uottawa.ca/~nat/Courses/NLP-Course/itnn_1999_09_1048.pdf,ok,129967,downloaded from site.uottawa.ca mirror
+03_androutsopoulos_2000,03_androutsopoulos_2000_nb_vs_keyword_antispam.pdf,https://arxiv.org/pdf/cs/0008019.pdf,ok,354695,System.Collections.ArrayList
+04_metsis_2006,04_metsis_2006_which_naive_bayes.pdf,https://nlp.cs.aueb.gr/pubs/ceas2006_paper.pdf,ok,1245616,System.Collections.ArrayList
+05_guzella_2009,05_guzella_2009_review_ml_spam_filtering.pdf,https://citeseerx.ist.psu.edu/document?doi=66405753664af1895830f147365cc5903388dea1&repid=rep1&type=pdf,ok,491676,downloaded from user-provided local PDF; verified by local extraction
+06_platt_1999,06_platt_1999_probabilistic_outputs_svm.pdf,https://users.cs.fiu.edu/~sjha/class2024/1999PlattScaling.pdf,ok,615694,System.Collections.ArrayList
+07_niculescu_mizil_caruana_2005,07_niculescu_mizil_caruana_2005_predicting_good_probabilities.pdf,https://icml.cc/Conferences/2005/proceedings/papers/079_GoodProbabilities_NiculescuMizilCaruana.pdf,ok,409128,System.Collections.ArrayList
+08_guo_2017,08_guo_2017_calibration_modern_neural_networks.pdf,https://proceedings.mlr.press/v70/guo17a/guo17a.pdf,ok,828420,System.Collections.ArrayList
+09_devlin_2019,09_devlin_2019_bert.pdf,https://arxiv.org/pdf/1810.04805.pdf,ok,775166,System.Collections.ArrayList
