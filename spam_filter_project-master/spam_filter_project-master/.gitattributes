@@ -1,0 +1,6 @@
+data/splits/train.csv filter=lfs diff=lfs merge=lfs -text
+data/splits/valid.csv filter=lfs diff=lfs merge=lfs -text
+data/splits/test.csv filter=lfs diff=lfs merge=lfs -text
+outputs/features/*.npz filter=lfs diff=lfs merge=lfs -text
+data/cleaned/main_dataset_5000.csv filter=lfs diff=lfs merge=lfs -text
+data/splits/main_dataset_split.csv filter=lfs diff=lfs merge=lfs -text
