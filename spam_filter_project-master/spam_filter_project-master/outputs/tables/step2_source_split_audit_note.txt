@@ -1,1 +1,0 @@
-train/test sender and subject overlaps reflect shared public corpus metadata missingness and repeated mailing-list subjects; md5 duplication is 0.

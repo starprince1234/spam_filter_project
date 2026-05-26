@@ -1,4 +1,0 @@
-{
-  "precision_floor": 0.95,
-  "note": "Threshold adjusted strategy selects the best validation threshold under the precision floor."
-}
