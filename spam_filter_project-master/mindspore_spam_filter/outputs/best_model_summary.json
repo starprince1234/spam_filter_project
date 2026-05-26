@@ -1,0 +1,15 @@
+{
+  "feature": "hybrid",
+  "input_dim": 420,
+  "threshold": 0.58,
+  "temperature": 1.553836585674384,
+  "precision": 0.9664429530201343,
+  "recall": 0.96,
+  "f1": 0.9632107023411371,
+  "macro_f1": 0.9770258341014595,
+  "pr_auc": 0.9924831133879191,
+  "roc_auc": 0.9978666666666667,
+  "brier": 0.01261583304045523,
+  "ece": 0.006315255903896784,
+  "model_dir": "E:\\川大上课\\模式识别\\spam_filter_project-master\\spam_filter_project-master\\mindspore_spam_filter\\outputs\\hybrid"
+}

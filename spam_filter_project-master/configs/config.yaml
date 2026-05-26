@@ -1,0 +1,55 @@
+project:
+  name: spam_filter_project
+  seed: 42
+  target_language: "en"
+
+paths:
+  raw_data: data/raw
+  cleaned_data: data/cleaned
+  splits: data/splits
+  external: data/external
+  papers: papers
+  figures: outputs/figures
+  tables: outputs/tables
+  predictions: outputs/predictions
+  error_analysis: outputs/error_analysis
+  logs: experiments/logs
+  results: experiments/results
+  exp_configs: experiments/configs
+  models_raw: models/raw
+  models_calibrated: models/calibrated
+  models_best: models/best
+
+data:
+  final_main_dataset_size: 5000
+  class_distribution:
+    ham: 4000
+    spam: 1000
+  split_sizes:
+    train: 3500
+    valid: 750
+    test: 750
+
+threshold:
+  grid_start: 0.05
+  grid_end: 0.95
+  grid_step: 0.01
+  precision_floor: 0.95
+
+calibration:
+  svm: platt
+  tree: sigmoid
+  bert: temperature_scaling
+  logistic_regression: compare_before_after
+
+models:
+  deployment_default: calibrated_logistic_regression
+
+features:
+  text_word_ngram: [1, 2]
+  text_char_ngram: [3, 5]
+  structured_feature_count: 20
+
+logging:
+  level: INFO
+  file: experiments/logs/project.log
