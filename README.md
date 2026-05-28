@@ -33,7 +33,7 @@
 
 ## 2. 严谨的实验设计与文献支撑
 
-### 2.1 核心论文矩阵（[`papers/literature_matrix.csv`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/papers/literature_matrix.csv)）
+### 2.1 核心论文矩阵（[`papers/literature_matrix.csv`](papers/literature_matrix.csv)）
 
 | 编号 | 论文 | 年份 | 核心方法 | 在本项目中的作用 |
 |---|---|---|---|---|
@@ -47,7 +47,7 @@
 | 8 | Guo et al. *On Calibration of Modern Neural Networks* | 2017 | Temperature Scaling | 本项目温度校准实现的直接依据 |
 | 9 | Devlin et al. *BERT* | 2019 | 预训练 Transformer | 现代深度文本基线，作为对照参考 |
 
-> 完整 PDF 与下载日志见 [`papers/`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/papers/) 目录，文献综述见 [`papers/summaries/step3_related_work.md`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/papers/summaries/step3_related_work.md)。
+> 完整 PDF 与下载日志见 [`papers/`](papers/) 目录，文献综述见 [`papers/summaries/step3_related_work.md`](papers/summaries/step3_related_work.md)。
 
 ### 2.2 数据集
 
@@ -57,13 +57,13 @@
 - SpamAssassin Public Corpus
 - TREC Spam Track（含官方 index 与 trec07p 预处理 CSV）
 
-数据治理脚本：[`src/data/build_dataset.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/data/build_dataset.py)、邮件解析：[`src/data/email_parser.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/data/email_parser.py)、最终数据：[`data/cleaned/main_dataset_5000.csv`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/data/cleaned/main_dataset_5000.csv)。
+数据治理脚本：[`src/data/build_dataset.py`](src/data/build_dataset.py)、邮件解析：[`src/data/email_parser.py`](src/data/email_parser.py)、最终数据：[`data/cleaned/main_dataset_5000.csv`](data/cleaned/main_dataset_5000.csv)。
 
 ---
 
 ## 3. 四套特征方案消融设计
 
-所有方案的实现位于 [`src/features/mindspore_features.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/features/mindspore_features.py)，支持以 `--feature` 参数切换：
+所有方案的实现位于 [`src/features/mindspore_features.py`](src/features/mindspore_features.py)，支持以 `--feature` 参数切换：
 
 ### 方案 A：词级 TF-IDF（`--feature word`）
 
@@ -213,8 +213,8 @@ python -m src.training.train --epochs 10 --feature word --hidden_dim 0
 
 输出：
 
-- [`outputs/mindspore/word/`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/outputs/mindspore/word/)：当次特征运行的全部产物
-- [`outputs/mindspore/best/`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/outputs/mindspore/best/)：最新一次训练复制的最佳权重
+- [`outputs/mindspore/word/`](outputs/mindspore/word/)：当次特征运行的全部产物
+- [`outputs/mindspore/best/`](outputs/mindspore/best/)：最新一次训练复制的最佳权重
 
 ### 5.3 评估
 
@@ -241,7 +241,7 @@ conda activate mindspore_env
 streamlit run app/streamlit_app.py
 ```
 
-默认监听 `http://localhost:8501`。**任何机器克隆仓库后都能一键启动**，因为 [`app/streamlit_app.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/app/streamlit_app.py) 与 6 个子页面的最顶部都内置了 `sys.path` 动态注入：
+默认监听 `http://localhost:8501`。**任何机器克隆仓库后都能一键启动**，因为 [`app/streamlit_app.py`](app/streamlit_app.py) 与 6 个子页面的最顶部都内置了 `sys.path` 动态注入：
 
 ```python
 import os
@@ -265,7 +265,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 | 单封邮件检测 | `app/pages/1_单封邮件检测.py` | 文本输入 → spam 概率 + 风险等级（安全 / 可疑 / 垃圾） |
 | .eml 文件检测 | `app/pages/2_eml文件检测.py` | 上传 .eml → 解析正文 + 头信息 → 分类预测 |
 | 批量 CSV 检测 | `app/pages/3_批量CSV检测.py` | 上传 CSV → 自动识别文本列 → 全量打分 + 导出 |
-| 错误分析 | `app/pages/4_错误分析.py` | 展示 [`outputs/error_analysis/step9_typical_error_cases.csv`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/outputs/error_analysis/step9_typical_error_cases.csv) |
+| 错误分析 | `app/pages/4_错误分析.py` | 展示 [`outputs/error_analysis/step9_typical_error_cases.csv`](outputs/error_analysis/step9_typical_error_cases.csv) |
 | 模型与指标 | `app/pages/5_模型与指标.py` | 展示 step5 / step6 / step7 / step8 等结果表 |
 | 历史记录 | `app/pages/6_历史记录.py` | 显示并清空 `outputs/predictions/history.csv` |
 
@@ -315,7 +315,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 
 环境：Windows 11 / CPU / Python 3.9.25 / MindSpore 2.6.0 PyNative。
 
-训练损失曲线（来自 [`outputs/mindspore/best/training_history.csv`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/outputs/mindspore/best/training_history.csv)）：
+训练损失曲线（来自 [`outputs/mindspore/best/training_history.csv`](outputs/mindspore/best/training_history.csv)）：
 
 | epoch | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -329,7 +329,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 - `temperature = 0.5`（基于 valid logits 拟合）
 - **`threshold = 0.61`**（valid 上扫描 0.05–0.95 后，在 Precision ≥ 0.95 的可行域内最大化 F1）
 
-最终指标（来自 [`outputs/mindspore/best/metadata.json`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/outputs/mindspore/best/metadata.json)）：
+最终指标（来自 [`outputs/mindspore/best/metadata.json`](outputs/mindspore/best/metadata.json)）：
 
 | 数据集 | Precision | Recall | F1 | Macro-F1 | PR-AUC | ROC-AUC | Brier | ECE |
 |---|---|---|---|---|---|---|---|---|
@@ -345,7 +345,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 
 > 解读：在 750 封测试邮件上，仅 **6 封** 正常邮件被误判为垃圾邮件（FP = 6），满足 “Precision ≥ 0.95” 的工业要求；同时召回了 **125/150 = 83.3%** 的真实垃圾邮件。
 
-### 6.2 不平衡处理策略对比（来自经典 ML 实验，[`experiments/results/step6_imbalance_strategy_comparison.csv`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/experiments/results/step6_imbalance_strategy_comparison.csv)）
+### 6.2 不平衡处理策略对比（来自经典 ML 实验，[`experiments/results/step6_imbalance_strategy_comparison.csv`](experiments/results/step6_imbalance_strategy_comparison.csv)）
 
 | 策略 | 模型 | threshold | Precision | Recall | F1 | Brier | ECE |
 |---|---|---|---|---|---|---|---|
@@ -358,7 +358,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 | cost_sensitive | logistic_regression | 0.50 | 0.8963 | 0.9800 | 0.9363 | 0.0462 | 0.1332 |
 | cost_sensitive | linear_svm | 0.50 | 0.9226 | 0.9533 | 0.9377 | 0.0164 | 0.0117 |
 
-### 6.3 校准前后指标（[`experiments/results/step7_calibration_comparison.csv`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/experiments/results/step7_calibration_comparison.csv)）
+### 6.3 校准前后指标（[`experiments/results/step7_calibration_comparison.csv`](experiments/results/step7_calibration_comparison.csv)）
 
 | 模型 | 校准方式 | Brier 前 | Brier 后 | ECE 前 | ECE 后 | PR-AUC（前/后） |
 |---|---|---|---|---|---|---|
@@ -367,7 +367,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 
 > Logistic Regression 经温度缩放后 ECE 由 0.1332 降至 0.0435，**降幅 67.4%**，校准效果显著。
 
-### 6.4 Precision ≥ 0.95 下的最优阈值（[`experiments/results/step8_threshold_analysis.csv`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/experiments/results/step8_threshold_analysis.csv)）
+### 6.4 Precision ≥ 0.95 下的最优阈值（[`experiments/results/step8_threshold_analysis.csv`](experiments/results/step8_threshold_analysis.csv)）
 
 | 模型 | 最优阈值 | 对应 Precision | 对应 Recall | 对应 F1 |
 |---|---|---|---|---|
@@ -381,15 +381,15 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 
 | 文件 | 作用 |
 |---|---|
-| [`src/data/mindspore_dataset.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/data/mindspore_dataset.py) | CSV 加载、标签归一化、`GeneratorDataset` |
-| [`src/features/mindspore_features.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/features/mindspore_features.py) | 词 / 字符 TF-IDF、20 维结构化、SVD |
-| [`src/models/mindspore_model.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/models/mindspore_model.py) | `nn.Cell` 分类器 + weighted BCE |
-| [`src/evaluation/mindspore_metrics.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/evaluation/mindspore_metrics.py) | 指标 + 温度校准 + 阈值扫描 |
-| [`src/training/train.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/training/train.py) | MindSpore 训练入口 |
-| [`src/evaluation/evaluate_mindspore.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/evaluation/evaluate_mindspore.py) | MindSpore 评估入口 |
-| [`src/prediction/predict.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/src/prediction/predict.py) | 单文本 / CSV 推理 |
-| [`app/streamlit_app.py`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/app/streamlit_app.py) | Streamlit 主入口 |
-| [`outputs/mindspore/best/metadata.json`](file:///F:/pycharm/AI_Projects/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/spam_filter_project_mindspore/outputs/mindspore/best/metadata.json) | 最终交付指标与阈值 |
+| [`src/data/mindspore_dataset.py`](src/data/mindspore_dataset.py) | CSV 加载、标签归一化、`GeneratorDataset` |
+| [`src/features/mindspore_features.py`](src/features/mindspore_features.py) | 词 / 字符 TF-IDF、20 维结构化、SVD |
+| [`src/models/mindspore_model.py`](src/models/mindspore_model.py) | `nn.Cell` 分类器 + weighted BCE |
+| [`src/evaluation/mindspore_metrics.py`](src/evaluation/mindspore_metrics.py) | 指标 + 温度校准 + 阈值扫描 |
+| [`src/training/train.py`](src/training/train.py) | MindSpore 训练入口 |
+| [`src/evaluation/evaluate_mindspore.py`](src/evaluation/evaluate_mindspore.py) | MindSpore 评估入口 |
+| [`src/prediction/predict.py`](src/prediction/predict.py) | 单文本 / CSV 推理 |
+| [`app/streamlit_app.py`](app/streamlit_app.py) | Streamlit 主入口 |
+| [`outputs/mindspore/best/metadata.json`](outputs/mindspore/best/metadata.json) | 最终交付指标与阈值 |
 
 ---
 
