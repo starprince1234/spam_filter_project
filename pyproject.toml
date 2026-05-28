@@ -7,7 +7,7 @@ name = "spam-filter-project"
 version = "0.1.0"
 description = "Enterprise spam mail filtering course project with reproducible ML pipeline and Streamlit prototype."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 authors = [
   { name = "ML Project Team" }
 ]

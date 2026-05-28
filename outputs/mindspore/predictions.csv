@@ -1,0 +1,2 @@
+clean_text,probability_spam,pred_label,pred_name,confidence
+"Congratulations, you win a free prize. Click now!",0.5145341588835164,1,spam,0.5145341588835164

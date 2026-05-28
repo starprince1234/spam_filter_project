@@ -24,3 +24,4 @@ data/cleaned/**/*.txt
 data/cleaned/all_parsed_raw.csv
 data/cleaned/all_parsed_clean_no_corrupt.csv
 data/cleaned/all_parsed_clean_dedup.csv
+.omo/

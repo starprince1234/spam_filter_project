@@ -1,6 +1,10 @@
-from __future__ import annotations
-
+import os
+import sys
 from pathlib import Path
+
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 import joblib
 import numpy as np
@@ -8,25 +12,40 @@ import pandas as pd
 import streamlit as st
 
 from src.data.email_parser import parse_eml_file
+from src.evaluation.mindspore_metrics import sigmoid_np
 from src.explainability.error_analysis import classify_error_case
+from src.models.mindspore_model import build_cells, require_mindspore
 from src.utils.io_utils import load_yaml
 
+ROOT = Path(project_root)
 
-ROOT = Path(__file__).resolve().parents[1]
 CFG = load_yaml(ROOT / "configs" / "config.yaml")
 RESULTS_DIR = ROOT / "experiments" / "results"
 ERROR_DIR = ROOT / "outputs" / "error_analysis"
 TABLES_DIR = ROOT / "outputs" / "tables"
-MODELS_DIR = ROOT / "models" / "calibrated"
+MODELS_DIR = ROOT / "outputs" / "mindspore" / "best"
 PRED_DIR = ROOT / "outputs" / "predictions"
 
 
 @st.cache_resource
 def load_default_model():
-    path = MODELS_DIR / "logistic_regression_calibrated.joblib"
-    if path.exists():
-        return joblib.load(path)
-    return joblib.load(ROOT / "models" / "raw" / "logistic_regression.joblib")
+    metadata_path = MODELS_DIR / "metadata.json"
+    bundle_path = MODELS_DIR / "feature_bundle.joblib"
+    checkpoint_path = MODELS_DIR / "model.ckpt"
+    if not (metadata_path.exists() and bundle_path.exists() and checkpoint_path.exists()):
+        return None
+
+    import json
+
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    ms, _, _, _ = require_mindspore()
+    ms.set_context(mode=ms.PYNATIVE_MODE, device_target="CPU")
+    Network, _ = build_cells(int(metadata["input_dim"]), int(metadata["hidden_dim"]), float(metadata["dropout"]))
+    network = Network()
+    params = ms.load_checkpoint(str(checkpoint_path))
+    ms.load_param_into_net(network, params)
+    network.set_train(False)
+    return {"metadata": metadata, "bundle": joblib.load(bundle_path), "network": network}
 
 
 def risk_level(prob: float) -> str:
@@ -38,34 +57,18 @@ def risk_level(prob: float) -> str:
 
 
 def predict_text(text: str) -> dict:
-    bundle = load_default_model()
-    if isinstance(bundle, dict) and "model" in bundle and isinstance(bundle["model"], dict):
-        base = bundle["model"]
-        model = base["model"]
-        vec = base["vectorizer"]
-        calibration_type = bundle.get("calibration_type")
-        calibrator = bundle.get("calibrator")
-    else:
-        model = bundle["model"] if isinstance(bundle, dict) and "model" in bundle else bundle
-        vec = bundle.get("vectorizer") if isinstance(bundle, dict) else None
-        calibration_type = None
-        calibrator = None
-    if vec is None:
+    model_bundle = load_default_model()
+    if model_bundle is None:
         return {"probability": 0.0, "label": "不可用"}
-    prob = float(model.predict_proba(vec.transform([text]))[:, 1][0])
-    if calibration_type == "temperature" and isinstance(calibrator, dict):
-        t = float(calibrator.get("temperature", 1.0))
-        t = max(t, 1e-6)
-        p = min(max(prob, 1e-6), 1 - 1e-6)
-        logit = np.log(p / (1 - p))
-        prob = float(1 / (1 + np.exp(-logit / t)))
-    elif calibration_type == "sigmoid" and hasattr(calibrator, "predict_proba"):
-        p = min(max(prob, 1e-6), 1 - 1e-6)
-        logit = np.log(p / (1 - p))
-        prob = float(calibrator.predict_proba(np.array([[logit]]))[:, 1][0])
+    ms, Tensor, _, _ = require_mindspore()
+    features = model_bundle["bundle"].transform([text])
+    logits = model_bundle["network"](Tensor(features.astype(np.float32), ms.float32)).asnumpy()
+    temperature = float(model_bundle["metadata"].get("temperature", 1.0))
+    threshold = float(model_bundle["metadata"].get("threshold", 0.5))
+    prob = float(sigmoid_np(logits / temperature)[0])
     return {
         "probability": prob,
-        "pred": int(prob >= 0.84),
+        "pred": int(prob >= threshold),
         "risk": risk_level(prob),
     }
 
