@@ -193,6 +193,13 @@ MindSpore version:  2.6.0
 The result of multiplication calculation is correct, MindSpore has been installed on platform [CPU] successfully!
 ```
 
+若报错：
+
+```
+# 强制降级 protobuf 到兼容版本
+pip install protobuf==3.20.3 --force-reinstall -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
 ### 5.2 训练（10 epoch 正式运行）
 
 ```bash
