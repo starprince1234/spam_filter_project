@@ -193,12 +193,6 @@ MindSpore version:  2.6.0
 The result of multiplication calculation is correct, MindSpore has been installed on platform [CPU] successfully!
 ```
 
-若报错：
-
-```
-# 强制降级 protobuf 到兼容版本
-pip install protobuf==3.20.3 --force-reinstall -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
 
 ### 5.2 训练（10 epoch 正式运行）
 
@@ -246,6 +240,13 @@ python -m src.prediction.predict --input_csv data/splits/test.csv --output_csv o
 ```bash
 conda activate mindspore_env
 streamlit run app/streamlit_app.py
+```
+
+若报错：
+
+```
+# 强制降级 protobuf 到兼容版本
+pip install protobuf==3.20.3 --force-reinstall -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 默认监听 `http://localhost:8501`。**任何机器克隆仓库后都能一键启动**，因为 [`app/streamlit_app.py`](app/streamlit_app.py) 与 6 个子页面的最顶部都内置了 `sys.path` 动态注入：
